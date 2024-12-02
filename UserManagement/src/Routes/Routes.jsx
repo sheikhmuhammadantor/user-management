@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { ErrorPage, Home, MainLayout } from "../App";
+import { AddUser, ErrorPage, Home, MainLayout, UpdateUser } from "../App";
 
 export const router = createBrowserRouter([
   {
@@ -10,6 +10,14 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: '/add-user',
+        element: <AddUser/>
+      },
+      {
+        path: '/update-user',
+        element: <UpdateUser/>
       }
     ]
   },
