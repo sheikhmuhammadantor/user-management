@@ -1,6 +1,11 @@
+import { useLoaderData } from "react-router-dom"
 import AllUser from "../Components/AllUser"
 
 function Home() {
+
+  const usersData = useLoaderData();
+  const usersDataA = [] ;
+
   return (
     <div className="">
       <div>
@@ -16,12 +21,9 @@ function Home() {
           </div>
         </div>
         <div className="space-y-1">
-
-          <AllUser></AllUser>
-          <AllUser></AllUser>
-          <AllUser></AllUser>
-          <AllUser></AllUser>
-
+    {
+      usersData.length === 0 ? <h3 className="text-5xl mt-20">No Data Found  !!</h3> : usersData.map((userData, idx) => <AllUser idx={idx} key={userData._id} userData={userData} />)
+    }
         </div>
       </div>
     </div>

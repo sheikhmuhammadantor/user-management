@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config();
 
 const app = express();
@@ -23,20 +23,30 @@ async function run() {
         await client.connect();
         const userDB = client.db('usersData').collection('users');
 
+        app.get('/all-user', async (req, res) => {
+            const result = await userDB.find().toArray();
+            res.send(result);
+        })
+
+        app.delete('/all-user', async (req, res) => {
+            const id = req.body.id;
+            const query = { _id: new ObjectId(id) }
+            const result = await userDB.deleteOne(query)
+            res.send(result)
+        })
+
         app.post('/add-user', async (req, res) => {
             const result = await userDB.insertOne(req.body);
             res.send(result);
         })
 
-        
-
         // await client.db("admin").command({ ping: 1 });
         console.log("Pinged Your deployment.");
-    } catch (error) {
-        console.dir(error);
+    } finally {
+        console.log('Okay, 200');
     }
 }
-run();
+run().catch(console.dir);;
 
 app.get('/', (req, res) => {
     console.log("Hello Server  !!");
