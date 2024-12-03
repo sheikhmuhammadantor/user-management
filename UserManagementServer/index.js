@@ -28,6 +28,29 @@ async function run() {
             res.send(result);
         })
 
+        app.get('/update-user/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) }
+
+            const result = await userDB.findOne(query);
+            res.send(result);
+        })
+
+        app.put('/update-user/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: new ObjectId(id) };
+            const options = { upsert: true };
+            const updateUser = req.body;
+            const user = {
+                $set: {
+                    name: updateUser.name,
+                    email: updateUser.email
+                }
+            }
+            const result = await userDB.updateOne(filter, user, options)
+            res.send(result);
+        })
+
         app.delete('/all-user', async (req, res) => {
             const id = req.body.id;
             const query = { _id: new ObjectId(id) }

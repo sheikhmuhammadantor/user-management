@@ -5,7 +5,7 @@ function Header() {
   const links = <div className="flex gap-4">
     <NavLink className="btn text-lg" to = "/" > All User</NavLink>
     <NavLink className="btn text-lg" to="/add-user">Add User</NavLink>
-    <NavLink className="btn text-lg" to="/update-user">Update User</NavLink>
+    {/* <NavLink className="btn text-lg" to="/update-user/:id">Update User</NavLink> */}
   </div>
     
 return (

@@ -1,5 +1,6 @@
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 function AllUser({ idx, userData }) {
 
@@ -13,10 +14,10 @@ function AllUser({ idx, userData }) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({id})
+            body: JSON.stringify({ id })
         })
-        .then(res => res.json())
-        .then(data => console.log(data))
+            .then(res => res.json())
+            .then(data => console.log(data))
     }
 
     return (
@@ -27,9 +28,10 @@ function AllUser({ idx, userData }) {
             <h3 className="grid place-items-center">{gender}</h3>
             <h3 className="grid place-items-center"></h3>
             <div className="flex gap-2 -mr-4">
-                <h3 className="btn text-2xl">
-                    <FaPencilAlt />
-                </h3>
+                <Link to={`/update-user/${_id}`}>
+                    <h3 className="btn text-2xl">
+                        <FaPencilAlt />
+                    </h3></Link>
                 <h3 onClick={() => handelUserDelete(_id)} className="btn text-2xl">
                     <MdDelete />
                 </h3>
